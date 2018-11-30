@@ -1,0 +1,8 @@
+C:\git\CCA.Services.LogNook\CCA.Services.LogNook.Database\bin\Debug\CCA.Services.Goober.LogNook.dacpac
+C:\git\CCA.Services.LogNook\CCA.Services.LogNook.Database\obj\Debug\CCA.Services.Goober.LogNook.sqlprojAssemblyReference.cache
+C:\git\CCA.Services.LogNook\CCA.Services.LogNook.Database\obj\Debug\Model.xml
+C:\git\CCA.Services.LogNook\CCA.Services.LogNook.Database\obj\Debug\refactor.xml
+C:\git\CCA.Services.LogNook\CCA.Services.LogNook.Database\obj\Debug\postdeploy.sql
+C:\git\CCA.Services.LogNook\CCA.Services.LogNook.Database\obj\Debug\predeploy.sql
+C:\git\CCA.Services.LogNook\CCA.Services.LogNook.Database\obj\Debug\ECA.Services.Goober.Database.dll
+C:\git\CCA.Services.LogNook\CCA.Services.LogNook.Database\obj\Debug\ECA.Services.Goober.Database.pdb
