@@ -1,6 +1,0 @@
-C:\git\CCA.Services.LogNook\CCA.Services.LogNook.Database\bin\Debug\CCA.Services.LogNook.Database.dacpac
-C:\git\CCA.Services.LogNook\CCA.Services.LogNook.Database\obj\Debug\ECA.Services.Goober.Database.dll
-C:\git\CCA.Services.LogNook\CCA.Services.LogNook.Database\obj\Debug\ECA.Services.Goober.Database.pdb
-C:\git\CCA.Services.LogNook\CCA.Services.LogNook.Database\bin\Debug\ECA.Services.Goober.Database.dll
-C:\git\CCA.Services.LogNook\CCA.Services.LogNook.Database\bin\Debug\ECA.Services.Goober.Database.pdb
-C:\git\CCA.Services.LogNook\CCA.Services.LogNook.Database\obj\Debug\CCA.Services.LogNook.Database.sqlprojAssemblyReference.cache
