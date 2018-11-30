@@ -35,9 +35,6 @@
     <Content Update="appsettings.json">
       <TransformOnBuild>true</TransformOnBuild>
     </Content>
-    <Content Update="nlog.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 
   <ItemGroup>
