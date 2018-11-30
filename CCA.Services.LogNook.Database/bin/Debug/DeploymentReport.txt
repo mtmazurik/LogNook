@@ -1,0 +1,26 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Create
+       [usrCA] (User)
+       [LogNookServiceUser] (Role)
+       [dbo].[Log] (Table)
+       [dbo].[PeanutButter] (Table)
+       Permission (Permission)
+       Permission (Permission)
+       Permission (Permission)
+       Permission (Permission)
+       Permission (Permission)
+
+** Supporting actions
+
+The object [usrCA] already exists in database with a different definition and will not be altered.
+

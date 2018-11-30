@@ -76,7 +76,7 @@ namespace CCA.Services.LogNook
                 {
                     Title = "LogNook Service",
                     Version = "v1",
-                    Description = "RESTful API, microscervice example, called 'LogNook' Service",
+                    Description = "RESTful API, micro service called 'LogNook'",
                     TermsOfService = "(C) 2018 Cloud Computing Associates (CCA)  All Rights Reserved."
                 });
             });
@@ -99,6 +99,7 @@ namespace CCA.Services.LogNook
             loggerFactory.AddConsole(_configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
             loggerFactory.AddContext(LogLevel.Information, _configuration.GetConnectionString("LoggerDatabase"));
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -112,8 +113,7 @@ namespace CCA.Services.LogNook
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "LogNook Service");
             });
 
-            // JWT - using ASPNETCore 
-            app.UseAuthentication();
+            app.UseAuthentication();    // JWT Auth - using ASPNETCore methodology
 
             app.UseCors("CorsPolicy");
 

@@ -66,14 +66,12 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Log.sql" />
-    <Build Include="dbo\Tables\PeanutButter.sql" />
     <Build Include="Security\usrCA.sql" />
     <Build Include="Security\LogNookServiceUser.sql" />
     <Build Include="Security\usrCA_1.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Publish Profiles\Localhost.publish.xml" />
-    <None Include="Publish Profiles\Octopus.publish.xml" />
     <None Include="Scripts\Permissions.sql" />
   </ItemGroup>
   <ItemGroup>

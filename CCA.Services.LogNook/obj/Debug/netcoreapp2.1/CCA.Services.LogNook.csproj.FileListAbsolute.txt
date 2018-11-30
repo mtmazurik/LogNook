@@ -1,6 +1,5 @@
 C:\git\CCA.Services.LogNook\CCA.Services.LogNook\obj\Debug\netcoreapp2.1\CCA.Services.LogNook.csprojAssemblyReference.cache
 C:\git\CCA.Services.LogNook\CCA.Services.LogNook\obj\Debug\netcoreapp2.1\CCA.Services.LogNook.csproj.CoreCompileInputs.cache
-C:\git\CCA.Services.LogNook\CCA.Services.LogNook\bin\Debug\netcoreapp2.1\nlog.config
 C:\git\CCA.Services.LogNook\CCA.Services.LogNook\bin\Debug\netcoreapp2.1\eca.services.goober.deps.json
 C:\git\CCA.Services.LogNook\CCA.Services.LogNook\bin\Debug\netcoreapp2.1\eca.services.goober.runtimeconfig.json
 C:\git\CCA.Services.LogNook\CCA.Services.LogNook\bin\Debug\netcoreapp2.1\eca.services.goober.runtimeconfig.dev.json
