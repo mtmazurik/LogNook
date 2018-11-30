@@ -26,3 +26,10 @@
 /CCA.Services.Goober.Database/CCA.Services.Goober.Database.jfm
 /CCA.Services.Goober/bin/Release/netcoreapp2.1
 /CCA.Services.Goober.DAL/bin/Release/netcoreapp2.1
+/CCA.Services.LogNook/obj
+/CCA.Services.LogNook.Database/bin/Debug
+/CCA.Services.LogNook.Database/obj/Debug/CCA.Services.LogNook.Database.sqlproj.FileListAbsolute.txt
+/CCA.Services.LogNook.Database/obj/Debug
+/CCA.Services.LogNook.Tests/obj/Debug/netcoreapp2.1
+/CCA.Services.LogNook.Tests/obj/CCA.Services.LogNook.Tests.csproj.nuget.cache
+/CCA.Services.LogNook.Tests/obj
