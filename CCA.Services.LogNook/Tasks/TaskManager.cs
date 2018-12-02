@@ -36,7 +36,6 @@ namespace CCA.Services.LogNook.Tasks
 
                     //await _worker.DoTheTask();       // task manager worker routine, run asynchronously                   
                 }
-                _logger.LogDebug($"Outside the TaskManager dispatch loop.");
             }
             catch (Exception exc)
             {

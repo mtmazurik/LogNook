@@ -7,6 +7,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace CCA.Services.LogNook
 {
@@ -14,17 +15,8 @@ namespace CCA.Services.LogNook
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();       // .Net Core lowest lvl event handler, thread.   Allows controller to listen, for WebApi REST MVC events
+            IWebHost webHost = WebHost.CreateDefaultBuilder().UseStartup<Startup>().Build();                   
+            webHost.Run();
         }
-
-       public static IWebHost BuildWebHost(string[] args) =>        // NLog suggested rework of BuildWebHost
-            WebHost.CreateDefaultBuilder(args)
-               .UseStartup<Startup>()
-               .ConfigureLogging(logging =>
-               {
-                   logging.ClearProviders();
-                   logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
-               })
-               .Build();
     }
 }

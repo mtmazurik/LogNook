@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <AssemblyName>eca.services.goober</AssemblyName>
+    <AssemblyName>eca.services.lognook</AssemblyName>
     <AssemblyVersion>0.1.0.0</AssemblyVersion>
     <Version>0.1.0</Version>
     <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
@@ -49,5 +49,6 @@
   <PropertyGroup>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <DockerTargetOS>Windows</DockerTargetOS>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 </Project>

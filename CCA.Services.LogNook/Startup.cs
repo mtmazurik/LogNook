@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Hosting;
+//using Microsoft.Extensions.Hosting;
 using CCA.Services.LogNook.Config;
 using CCA.Services.LogNook.Security;
 using CCA.Services.LogNook.Models;
@@ -15,12 +15,14 @@ using CCA.Services.LogNook.Tasks;
 using CCA.Services.LogNook.Logging.Models;
 using CCA.Services.LogNook.Logging.Provider;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using CCA.Services.LogNook.Service;
 
 namespace CCA.Services.LogNook
 {
     public class Startup
     {
-        public IConfigurationRoot _configuration { get; }
+        private ILogger<Program> _logger;
+        private IConfigurationRoot _configuration { get; }
 
         public Startup(Microsoft.AspNetCore.Hosting.IHostingEnvironment env)       // ctor
         {
@@ -29,9 +31,13 @@ namespace CCA.Services.LogNook
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
-            _configuration = builder.Build();                
+            _configuration = builder.Build();
         }
-    
+        private void OnShutdown() // callback, applicationLifetime.ApplicationStopping triggers it
+        {
+           _logger.Log(LogLevel.Information, "LogNook service stopped.");
+        }
+
         public void ConfigureServices(IServiceCollection services)    // Add services to the ASPNETCore App. This gets called by the runtime. 
         {
             services.AddCors(options =>
@@ -88,13 +94,18 @@ namespace CCA.Services.LogNook
             services.AddTransient<HttpClient>();
             services.AddTransient<IJsonConfiguration, JsonConfiguration>();
             services.AddTransient<IWorker, Worker>();
+            services.AddTransient<ILogNookService, LogNookService>();
            
             // logger setup
             CustomLoggerDBContext.ConnectionString = _configuration.GetConnectionString("LoggerDatabase");
         }
-
+       public void ConfigureLogging( ILoggingBuilder logging)
+       {
+            logging.ClearProviders();
+            logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
+       }
         // Use this method to configure the HTTP request pipeline. This method gets called by the runtime. 
-        public void Configure(IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IApplicationLifetime applicationLifetime, Microsoft.AspNetCore.Hosting.IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(_configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -118,6 +129,11 @@ namespace CCA.Services.LogNook
             app.UseCors("CorsPolicy");
 
             app.UseMvc();
+
+            _logger = loggerFactory.CreateLogger<Program>();
+            _logger.Log(LogLevel.Information, "LogNook service started.");
+
+            applicationLifetime.ApplicationStopping.Register( OnShutdown );
         }
     }
 }
