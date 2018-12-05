@@ -1,10 +1,13 @@
 version: '3.4'
 
 services:
-  CCA.services.goober:
+  cca.services.lognook:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
-      - "8080:80"
+      - "8901:80"
 
-
+networks:
+  default:
+    external:
+      name: nat
