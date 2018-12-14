@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   cca.services.lognook:
-    image: ${DOCKER_REGISTRY}ccaserviceslognook
+    image: lognook
     build:
       context: .
       dockerfile: CCA.Services.LogNook\Dockerfile
