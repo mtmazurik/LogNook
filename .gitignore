@@ -5,7 +5,7 @@
 /.vs/slnx.sqlite
 /.vs/VSWorkspaceState.json
 /.vs/CCA.Services.Goober/v15/Server/sqlite3/db.lock
-/.vs
+.vs/
 /bin/Debug
 /CCA.Services.Goober/bin/Debug/netcoreapp2.1
 /CCA.Services.Goober/obj

@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <AssemblyName>eca.services.lognook</AssemblyName>
+    <AssemblyName>cca.services.lognook</AssemblyName>
     <AssemblyVersion>0.1.0.0</AssemblyVersion>
     <Version>0.1.0</Version>
     <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
@@ -50,5 +50,8 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <DockerTargetOS>Windows</DockerTargetOS>
     <LangVersion>latest</LangVersion>
+    <StartupObject></StartupObject>
+    <ApplicationIcon />
+    <OutputType>Library</OutputType>
   </PropertyGroup>
 </Project>
