@@ -7,7 +7,7 @@ EXPOSE 80
 
 FROM microsoft/dotnet:2.2-sdk-nanoserver-1803 AS build
 WORKDIR /src
-COPY ["CCA.Services.LogNook.csproj", "CCA.Services.LogNook/"]
+COPY ["CCA.Services.LogNook/CCA.Services.LogNook.csproj", "CCA.Services.LogNook/"]
 RUN dotnet restore "CCA.Services.LogNook/CCA.Services.LogNook.csproj"
 COPY . .
 WORKDIR "/src/CCA.Services.LogNook"

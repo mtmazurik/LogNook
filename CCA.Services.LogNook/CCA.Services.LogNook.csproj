@@ -52,6 +52,6 @@
     <LangVersion>latest</LangVersion>
     <StartupObject></StartupObject>
     <ApplicationIcon />
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
   </PropertyGroup>
 </Project>
