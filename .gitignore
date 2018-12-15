@@ -35,3 +35,7 @@
 /CCA.Services.LogNook.Tests/obj
 /CCA.Services.LogNook/bin/Debug/netcoreapp2.1
 /CCA.Services.LogNook/bin/Debug/netcoreapp2.2
+/CCA.Services.LogNook.Database
+/deleteMeProject/obj
+/deleteMeProject
+/fullproject.xml
