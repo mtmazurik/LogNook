@@ -7,10 +7,10 @@ trigger:
 - master
 
 pool:
-  vmImage: 'Ubuntu-16.04'
+  vmImage: 'vs2017-win2016'
 
 variables:
-  imageName: 'your-container-image-name:$(build.buildId)'
+  imageName: 'lognook:$(build.buildId)'
 
 steps:
 - script: docker build -f Dockerfile -t $(imageName) .
