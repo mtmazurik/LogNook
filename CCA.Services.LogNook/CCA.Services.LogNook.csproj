@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Dockerfile.original" />
     <None Remove="Properties\PublishProfiles\registry.hub.docker.com_marty%40martymazurik.com.pubxml" />
   </ItemGroup>
 
