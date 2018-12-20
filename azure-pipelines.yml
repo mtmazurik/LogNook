@@ -13,7 +13,8 @@ variables:
   imageName: 'lognook:$(build.buildId)'
 
 steps:
-- script:  docker build -f ./CCA.Services.LogNook/Dockerfile -t $(dockerId).azurecr.io/$(imageName) .
-  script:  docker login -u $(dockerId) -p $(dockerPassword) $(dockerId).azurecr.io
-  script:  docker push $dock$(dockerId).azurecr.io/$(imageName)
+- script:  
+    docker build -f ./CCA.Services.LogNook/Dockerfile -t $(dockerId).azurecr.io/$(imageName) .
+    docker login -u $(dockerId) -p $(dockerPassword) $(dockerId).azurecr.io
+    docker push $dock$(dockerId).azurecr.io/$(imageName)
   displayName: 'docker build-n-push to Azure Container Registry (ACR)'
