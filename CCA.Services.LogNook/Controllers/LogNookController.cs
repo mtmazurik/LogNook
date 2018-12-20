@@ -6,7 +6,6 @@ using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Authorization;
 using CCA.Services.LogNook.JsonHelpers;
 using CCA.Services.LogNook.Models;
-using CCA.Services.LogNook.Logging.Models;
 using Microsoft.Extensions.Logging;
 using CCA.Services.LogNook.Service;
 using Microsoft.AspNetCore.Hosting;
@@ -22,7 +21,7 @@ namespace CCA.Services.LogNook.Controllers
             _logger = logger;
         }
         [HttpPut("kill")]   // PUT in killed state : container ASPNETCore is shut down completely -> no more logging via its host container
-        [Authorize]
+        //[Authorize]
         [SwaggerResponse((int)HttpStatusCode.OK, typeof(Response))]
         public IActionResult Kill([FromServices]ILogNookService service)
         {
@@ -30,15 +29,15 @@ namespace CCA.Services.LogNook.Controllers
             return ResultFormatter.ResponseOK(service.kill());
         }
         [HttpGet("ping")]   // ping
-        [AllowAnonymous]
+        [AllowAnonymous]    // no Auth needed 
         [SwaggerResponse((int)HttpStatusCode.OK, typeof(Response))]
         public IActionResult GetPing()
         {
-            _logger.LogInformation("GET ping");
+            _logger.LogInformation("GET ping method called.");
             return ResultFormatter.ResponseOK((new JProperty("Ping", "Success")));
         }
         [HttpGet("version")]   // service version (from compiled assembly version)
-        [Authorize]
+        //[Authorize]
         [SwaggerResponse((int)HttpStatusCode.OK, typeof(Response))]
         public IActionResult GetVersion()
         {

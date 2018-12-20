@@ -15,7 +15,18 @@ namespace CCA.Services.LogNook
     {
         public static void Main(string[] args)
         {
-            IWebHost webHost = WebHost.CreateDefaultBuilder().UseStartup<Startup>().Build();                   
+            IWebHost webHost = new WebHostBuilder()
+                .UseKestrel()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .ConfigureAppConfiguration((hostingContext, config) =>
+                {
+                    var env = hostingContext.HostingEnvironment;
+                    config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+                    config.AddEnvironmentVariables();
+                })
+                .UseApplicationInsights("81dcd140-75ba-4fba-8eb0-ee080568f5cc")       // Application Insights
+                .UseStartup<Startup>()
+                .Build();                   
             webHost.Run();
         }
     }

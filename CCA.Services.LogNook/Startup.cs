@@ -7,24 +7,24 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-//using Microsoft.Extensions.Hosting;
 using CCA.Services.LogNook.Config;
 using CCA.Services.LogNook.Security;
 using CCA.Services.LogNook.Models;
 using CCA.Services.LogNook.Tasks;
-using CCA.Services.LogNook.Logging.Models;
-using CCA.Services.LogNook.Logging.Provider;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using CCA.Services.LogNook.Service;
+using System;
 
 namespace CCA.Services.LogNook
 {
     public class Startup
     {
-        private ILogger<Program> _logger;
+        private ILogger<Startup> _logger;
         private IConfigurationRoot _configuration { get; }
 
-        public Startup(Microsoft.AspNetCore.Hosting.IHostingEnvironment env)       // ctor
+        private ILoggerFactory _loggerFactory;
+
+        public Startup(Microsoft.AspNetCore.Hosting.IHostingEnvironment env, ILogger<Startup> logger, ILoggerFactory loggerFactory)       // ctor
         {
             var builder = new ConfigurationBuilder()        
                 .SetBasePath(env.ContentRootPath)
@@ -32,6 +32,8 @@ namespace CCA.Services.LogNook
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
             _configuration = builder.Build();
+            _logger = logger;
+            _loggerFactory = loggerFactory;
         }
         private void OnShutdown() // callback, applicationLifetime.ApplicationStopping triggers it
         {
@@ -56,15 +58,20 @@ namespace CCA.Services.LogNook
                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                }).AddJwtBearer(options =>
                {
-                   options.Authority = $"https://{_configuration["Auth0:Domain"]}/"; 
-                   options.Audience = _configuration["Auth0:ApiIdentifier"]; 
+                   options.Authority = $"https://{_configuration["Auth0:Domain"]}/";
+                   options.Audience = _configuration["Auth0:ApiIdentifier"];
                }
             );
- 
+
+
+            services.AddApplicationInsightsTelemetry(_configuration);           // Azure Application Insights
+            IServiceProvider serviceProvider = services.BuildServiceProvider();
+            _loggerFactory.AddApplicationInsights(serviceProvider, LogLevel.Information);
+
             services.AddMvc(options =>
             {
-                options.Filters.Add(new AllowAnonymousFilter());
-            }).AddJsonOptions( options =>
+                options.Filters.Add(new AllowAnonymousFilter(_logger));
+            }).AddJsonOptions(options =>
             {
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 options.SerializerSettings.DefaultValueHandling = DefaultValueHandling.Include;
@@ -87,7 +94,7 @@ namespace CCA.Services.LogNook
                 });
             });
 
-            string  dbConnectionString = _configuration.GetConnectionString("LogNookSvcRepository");
+            string dbConnectionString = _configuration.GetConnectionString("LogNookSvcRepository");
 
 
             services.AddTransient<IResponse, Response>();                       // Dependency injection (DI) - using ASPNETCore's built-in facility
@@ -95,21 +102,10 @@ namespace CCA.Services.LogNook
             services.AddTransient<IJsonConfiguration, JsonConfiguration>();
             services.AddTransient<IWorker, Worker>();
             services.AddTransient<ILogNookService, LogNookService>();
-           
-            // logger setup
-            CustomLoggerDBContext.ConnectionString = _configuration.GetConnectionString("LoggerDatabase");
+
         }
-       public void ConfigureLogging( ILoggingBuilder logging)
-       {
-            logging.ClearProviders();
-            logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
-       }
-        // Use this method to configure the HTTP request pipeline. This method gets called by the runtime. 
-        public void Configure(IApplicationBuilder app, IApplicationLifetime applicationLifetime, Microsoft.AspNetCore.Hosting.IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IApplicationLifetime applicationLifetime, Microsoft.AspNetCore.Hosting.IHostingEnvironment env)
         {
-            loggerFactory.AddConsole(_configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
-            loggerFactory.AddContext(LogLevel.Information, _configuration.GetConnectionString("LoggerDatabase"));
 
             if (env.IsDevelopment())
             {
@@ -130,8 +126,7 @@ namespace CCA.Services.LogNook
 
             app.UseMvc();
 
-            _logger = loggerFactory.CreateLogger<Program>();
-            _logger.Log(LogLevel.Information, "LogNook service started.");
+            _logger.Log(LogLevel.Warning,"LogNook service started.");
 
             applicationLifetime.ApplicationStopping.Register( OnShutdown );
         }
