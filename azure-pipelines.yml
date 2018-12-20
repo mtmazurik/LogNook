@@ -1,17 +1,21 @@
-# Docker image
-# Build a Docker image to deploy, run, or push to a container registry.
-# Add steps that use Docker Compose, tag images, push to a registry, run an image, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+# Build Docker image using Azure Pipelines
+# Target: Azure Container Registry (ACR)
 
+# source branch trigger  : branch called LogNook\AppInsights is logging to Azure Application Insights (master branch has log-to-sql table functionality)
 trigger:
-- master
+- AppInsights
 
 pool:
   vmImage: 'win1803'
 
 variables:
+  buildConfiguration: 'Release'
   imageName: 'lognook:$(build.buildId)'
 
 steps:
-- script: docker build -f ./CCA.Services.LogNook/Dockerfile -t $(imageName) .
-  displayName: 'docker build'
+- script:  docker build -f ./CCA.Services.LogNook/Dockerfile -t $(dockerId).azurecr.io/$(imageName) .
+  script:  docker login -u $(dockerId) -p $pwd $(dockerId).azurecr.io
+  script:  docker push $dock$(dockerId).azurecr.io/$(imageName)
+  displayName: 'docker build-n-push to Azure Container Registry (ACR)'
+env:
+  pwd: $(dockerPassword)
