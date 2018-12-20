@@ -16,5 +16,5 @@ steps:
 - script:  
     docker build -f ./CCA.Services.LogNook/Dockerfile -t $(dockerId).azurecr.io/$(imageName) .
     docker login -u $(dockerId) -p $(dockerPassword) $(dockerId).azurecr.io
-    docker push $dock$(dockerId).azurecr.io/$(imageName)
+    docker push $(dockerId).azurecr.io/$(imageName)
   displayName: 'docker build-n-push to Azure Container Registry (ACR)'
