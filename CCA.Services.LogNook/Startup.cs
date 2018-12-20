@@ -19,10 +19,10 @@ namespace CCA.Services.LogNook
 {
     public class Startup
     {
+        private ILoggerFactory _loggerFactory;      // built in ASPNetCore logging factory
         private ILogger<Startup> _logger;
         private IConfigurationRoot _configuration { get; }
 
-        private ILoggerFactory _loggerFactory;
 
         public Startup(Microsoft.AspNetCore.Hosting.IHostingEnvironment env, ILogger<Startup> logger, ILoggerFactory loggerFactory)       // ctor
         {
@@ -35,12 +35,12 @@ namespace CCA.Services.LogNook
             _logger = logger;
             _loggerFactory = loggerFactory;
         }
-        private void OnShutdown() // callback, applicationLifetime.ApplicationStopping triggers it
+        private void OnShutdown()                                       // callback, applicationLifetime.ApplicationStopping triggers it
         {
            _logger.Log(LogLevel.Information, "LogNook service stopped.");
         }
 
-        public void ConfigureServices(IServiceCollection services)    // Add services to the ASPNETCore App. This gets called by the runtime. 
+        public void ConfigureServices(IServiceCollection services)      // add services to the ASPNETCore App. This gets called by the WebHost runtime. 
         {
             services.AddCors(options =>
             {
@@ -51,9 +51,9 @@ namespace CCA.Services.LogNook
                     .AllowCredentials());
             });
 
-            // leverage Auth0.com FREE service for API Authentication (for now)
-            services.AddAuthentication(options =>
-               {
+            
+            services.AddAuthentication(options =>                               // using a free Auth0.com account for API Endpoint security (authentication/bearer token)
+            {
                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                }).AddJwtBearer(options =>
@@ -64,13 +64,13 @@ namespace CCA.Services.LogNook
             );
 
 
-            services.AddApplicationInsightsTelemetry(_configuration);           // Azure Application Insights
+            services.AddApplicationInsightsTelemetry(_configuration);           // Azure Application Insights statistical data turned on (telemetry)
             IServiceProvider serviceProvider = services.BuildServiceProvider();
-            _loggerFactory.AddApplicationInsights(serviceProvider, LogLevel.Information);
+            _loggerFactory.AddApplicationInsights(serviceProvider, LogLevel.Information);   // ASPNetCore logger instance causes everyting Information (and above) to be sent to AppInsights
 
-            services.AddMvc(options =>
+            services.AddMvc(options =>                                  
             {
-                options.Filters.Add(new AllowAnonymousFilter(_logger));
+                options.Filters.Add(new AllowAnonymousFilter(_logger));         // Controller filter. Lets [Anonymous] attribute on REST method (no security for that REST call)
             }).AddJsonOptions(options =>
             {
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
@@ -79,10 +79,10 @@ namespace CCA.Services.LogNook
             });
 
 
-            /* services.AddSingleton<IHostedService, TaskManager>();     */     // task manager  (for background processing)
+            // services.AddSingleton<IHostedService, TaskManager>();            // Tasks/ background task manager  (for multi-thread processing (optional) can turn on here)
 
 
-            services.AddSwaggerGen(options =>                                   // Swagger - autodocument setup
+            services.AddSwaggerGen(options =>                                   // swagger - autodocument setup
             {
                 options.DescribeAllEnumsAsStrings();
                 options.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info
@@ -94,10 +94,7 @@ namespace CCA.Services.LogNook
                 });
             });
 
-            string dbConnectionString = _configuration.GetConnectionString("LogNookSvcRepository");
-
-
-            services.AddTransient<IResponse, Response>();                       // Dependency injection (DI) - using ASPNETCore's built-in facility
+            services.AddTransient<IResponse, Response>();                       // Dependency injection (DI).  ASPNETCore's built-in
             services.AddTransient<HttpClient>();
             services.AddTransient<IJsonConfiguration, JsonConfiguration>();
             services.AddTransient<IWorker, Worker>();
@@ -112,23 +109,23 @@ namespace CCA.Services.LogNook
                 app.UseDeveloperExceptionPage();
             }
 
-            // Swagger- autodocument
-            app.UseStaticFiles();
+            
+            app.UseStaticFiles();                                               // swagger related
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "LogNook Service");
             });
 
-            app.UseAuthentication();    // JWT Auth - using ASPNETCore methodology
+            app.UseAuthentication();                                            // JWT Auth. ASPNETCore built-in functionality
 
-            app.UseCors("CorsPolicy");
+            app.UseCors("CorsPolicy");                                          // Cross-Origin Resource Sharing
 
             app.UseMvc();
 
-            _logger.Log(LogLevel.Warning,"LogNook service started.");
+            _logger.Log(LogLevel.Information,"LogNook service started.");       // log start
 
-            applicationLifetime.ApplicationStopping.Register( OnShutdown );
+            applicationLifetime.ApplicationStopping.Register( OnShutdown );     // hook callback for on-shutdown event
         }
     }
 }

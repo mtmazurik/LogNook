@@ -24,7 +24,7 @@ namespace CCA.Services.LogNook
                     config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
                     config.AddEnvironmentVariables();
                 })
-                .UseApplicationInsights("81dcd140-75ba-4fba-8eb0-ee080568f5cc")       // Application Insights
+                .UseApplicationInsights()                   // Application Insights
                 .UseStartup<Startup>()
                 .Build();                   
             webHost.Run();

@@ -15,17 +15,10 @@ namespace CCA.Services.LogNook.Controllers
     [Route("/")]
     public class LogNookController : Controller
     {
-        private readonly ILogger<LogNookController> _logger;
-         public LogNookController( ILogger<LogNookController> logger )   
-        {
-            _logger = logger;
-        }
-        [HttpPut("kill")]   // PUT in killed state : container ASPNETCore is shut down completely -> no more logging via its host container
-        //[Authorize]
+        [HttpPut("kill")]   // Kills the main thread, effectively shutting it down (todo:  rearchect a "restart", by creating the service code on its own thread, leaving the API /Controller running)
         [SwaggerResponse((int)HttpStatusCode.OK, typeof(Response))]
         public IActionResult Kill([FromServices]ILogNookService service)
         {
-            _logger.LogInformation("PUT kill requested");
             return ResultFormatter.ResponseOK(service.kill());
         }
         [HttpGet("ping")]   // ping
@@ -33,15 +26,12 @@ namespace CCA.Services.LogNook.Controllers
         [SwaggerResponse((int)HttpStatusCode.OK, typeof(Response))]
         public IActionResult GetPing()
         {
-            _logger.LogInformation("GET ping method called.");
             return ResultFormatter.ResponseOK((new JProperty("Ping", "Success")));
         }
         [HttpGet("version")]   // service version (from compiled assembly version)
-        //[Authorize]
         [SwaggerResponse((int)HttpStatusCode.OK, typeof(Response))]
         public IActionResult GetVersion()
         {
-            _logger.LogInformation("GET version");
             var assemblyVersion = typeof(Startup).Assembly.GetName().Version.ToString();
             return ResultFormatter.ResponseOK((new JProperty("Version", assemblyVersion)));
         }
