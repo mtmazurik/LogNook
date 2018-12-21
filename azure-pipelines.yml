@@ -15,6 +15,6 @@ variables:
 steps:
 - script:  |
     docker build -f ./CCA.Services.LogNook/Dockerfile -t nooksandcrannies.azurecr.io/$(imageName) .
-    az acr login --name NooksAndCrannies
+    docker login -u servicePrincipal -p servicePrincipalPassword nooksandcrannies.azurecr.io
     docker push nooksandcrannies.azurecr.io/$(imageName)
 
