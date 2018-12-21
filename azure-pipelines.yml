@@ -14,7 +14,7 @@ variables:
 
 steps:
 - script:  
-    docker build -f ./CCA.Services.LogNook/Dockerfile -t $(dockerId).azurecr.io/$(imageName) .
+    docker build -f ./CCA.Services.LogNook/Dockerfile -t nooksandcrannies.azurecr.io/$(imageName) .
     docker login -u nooksandcrannies -p nitramJOEY1234! nooksandcrannies.azurecr.io
     docker push nooksandcrannies.azurecr.io/$(imageName)
   displayName: 'docker build-n-push to Azure Container Registry (ACR)'
