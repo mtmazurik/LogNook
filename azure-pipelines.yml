@@ -1,7 +1,7 @@
 # Build Docker image using Azure Pipelines
 # Target: Azure Container Registry (ACR)
 
-# source branch trigger  : branch called LogNook\AppInsights is logging to Azure Application Insights (master branch has log-to-sql table functionality)
+# source branch trigger  : branch called LogNook\AppInsights is logging to Azure Application Insights (master branch has log-to-sql table functionality) 
 trigger:
 - AppInsights
 
