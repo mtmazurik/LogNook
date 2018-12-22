@@ -11,10 +11,12 @@ pool:
 variables:
   buildConfiguration: 'Release'
   imageName: 'lognook:$(build.buildId)'
+  servicePrincipal: '1c790620-e74b-45a9-b5c6-5ee26aec9a32'
+  servicePrincipalPassword: 'c6910be9-1dba-4ae2-917c-18a94b42fe01'
 
 steps:
 - script:  |
     docker build -f ./CCA.Services.LogNook/Dockerfile -t nooksandcrannies.azurecr.io/$(imageName) .
-    docker login -u servicePrincipal -p servicePrincipalPassword nooksandcrannies.azurecr.io
+    docker login -u $(servicePrincipal) -p $(servicePrincipalPassword) nooksandcrannies.azurecr.io
     docker push nooksandcrannies.azurecr.io/$(imageName)
 
