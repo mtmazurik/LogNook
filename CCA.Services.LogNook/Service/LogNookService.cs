@@ -9,7 +9,7 @@ namespace CCA.Services.LogNook.Service
     public class LogNookService : ILogNookService
     {
         private IApplicationLifetime _applicationLifetime;
-        public LogNookService(IApplicationLifetime applicationLifetime)     //ctor
+        public LogNookService(IApplicationLifetime applicationLifetime)     // ctor
         {
             _applicationLifetime = applicationLifetime;
         } 
