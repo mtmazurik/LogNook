@@ -10,7 +10,7 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-  imageName: 'lognook:$(build.buildId)'
+  imageName: 'lognook:latest'   # commented, was:   $(build.buildId)
   servicePrincipal: '1c790620-e74b-45a9-b5c6-5ee26aec9a32'
   servicePrincipalPassword: 'c6910be9-1dba-4ae2-917c-18a94b42fe01'
 
