@@ -5,4 +5,4 @@ services:
     image: ${DOCKER_REGISTRY}ccaserviceslognook
     build:
       context: .
-      dockerfile: CCA.Services.LogNook\Dockerfile
+      dockerfile: CCA.Services.LogNook/Dockerfile

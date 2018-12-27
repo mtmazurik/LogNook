@@ -61,5 +61,6 @@
     <OutputType>Exe</OutputType>
     <ApplicationInsightsResourceId>/subscriptions/952dfb7d-08e5-4e85-af0e-1a52239f9f47/resourcegroups/ContainersResourceGroup/providers/microsoft.insights/components/ContainersInsights</ApplicationInsightsResourceId>
     <ApplicationInsightsAnnotationResourceId>/subscriptions/952dfb7d-08e5-4e85-af0e-1a52239f9f47/resourcegroups/ContainersResourceGroup/providers/microsoft.insights/components/ContainersInsights</ApplicationInsightsAnnotationResourceId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 </Project>
