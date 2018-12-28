@@ -6,7 +6,7 @@ trigger:
 - AppInsights
 
 pool:
-  vmImage: 'win1803'
+  vmImage: 'Linux'
 
 variables:
   buildConfiguration: 'Release'
