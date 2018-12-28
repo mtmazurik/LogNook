@@ -6,7 +6,7 @@ trigger:
 - AppInsights
 
 pool:
-  vmImage: 'Linux'
+  vmImage: 'ubuntu-16.04'
 
 variables:
   buildConfiguration: 'Release'
