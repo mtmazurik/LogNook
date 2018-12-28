@@ -1,0 +1,4 @@
+az group create --name LogNookContainers --location westus
+az container create --resource-group LogNookContainers --name LogNook --image nooksandcrannies.azurecr.io/lognook:latest --ports 8901 --ip-address public
+
+az container show --resource-group LogNookContainers --name LogNook --query "{FQDN:ipAddress.fqdn,ProvisioningState:provisioningState}" --out table
