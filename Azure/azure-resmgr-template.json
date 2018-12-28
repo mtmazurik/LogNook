@@ -49,17 +49,16 @@
               "port": "8901"
             }
           ]
-        }
+        },
+        "imageRegistryCredentials": [
+          {
+            "server": "[parameters('nooksandcrannies.azurecr.io')]",
+            "username": "[parameters('1c790620-e74b-45a9-b5c6-5ee26aec9a32')]",
+            "password": "[parameters('c6910be9-1dba-4ae2-917c-18a94b42fe01')]"
+          }
+        ]
       }
-    },
-    "imageRegistryCredentials",
-    [
-      {
-        "server": "[parameters('nooksandcrannies.azurecr.io')]",
-        "username": "[parameters('1c790620-e74b-45a9-b5c6-5ee26aec9a32')]",
-        "password": "[parameters('c6910be9-1dba-4ae2-917c-18a94b42fe01')]"
-      }
-    ]
+    }
   ],
   "outputs": {
     "containerIPv4Address": {
