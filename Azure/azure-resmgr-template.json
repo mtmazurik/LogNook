@@ -4,7 +4,7 @@
   "parameters": {
     "containerGroupName": {
       "type": "string",
-      "defaultValue": "LogNookContainerGroup",
+      "defaultValue": "lognookcontainergroup",
       "metadata": {
         "description": "LogNook Container Group name."
       }
