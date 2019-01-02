@@ -34,7 +34,7 @@
               },
               "ports": [
                 {
-                  "port": 8901
+                  "port": 80
                 }
               ]
             }
@@ -46,7 +46,7 @@
           "ports": [
             {
               "protocol": "tcp",
-              "port": "8901"
+              "port": "80"
             }
           ]
         },
