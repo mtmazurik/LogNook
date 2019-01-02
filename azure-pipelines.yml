@@ -16,8 +16,11 @@ variables:
 
 steps:
 - script:  |
-    docker build -f ./CCA.Services.LogNook/Dockerfile -t nooksandcrannies.azurecr.io/$(imageName) .
     docker login -u $(servicePrincipal) -p $(servicePrincipalPassword) nooksandcrannies.azurecr.io
     docker rmi nooksandcrannies.azurecr.io/$(imageName)
+- script:  |
+    docker build -f ./CCA.Services.LogNook/Dockerfile -t nooksandcrannies.azurecr.io/$(imageName) .
+- script:  |
+    docker login -u $(servicePrincipal) -p $(servicePrincipalPassword) nooksandcrannies.azurecr.io
     docker push nooksandcrannies.azurecr.io/$(imageName)
 
