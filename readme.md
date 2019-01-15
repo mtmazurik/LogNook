@@ -1,7 +1,6 @@
-﻿readme.md
+﻿LogNook
 =========
 
-## LogNook
 Content is copyright (c) Cloud Computing Associates authors, released under [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/), which gives you permission to use content for almost any purpose (but does not grant you any trademark permissions), so long as you note the license and give attribution (credit), such as follows:
 
 
@@ -37,6 +36,11 @@ b) Deploy the container
 Az$> ./azure-deploy.sh     
 
 Step 4:  Cleanup your test   (so as not to incur costs on Azure, if testing things out)
+
+Your Container Registry can be cleaned out with https://github.com/mtmazurik/devops-handy/blob/master/ACR-delete-all-images.sh
+
+Note: Currently in testing the tag on the image in the repository is always :Latest, but in real-world, you will have
+versions, and may NOT want to use this script, lest you delete all previous image instances !
 
  
 
