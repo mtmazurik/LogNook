@@ -18,6 +18,7 @@ steps:
 - script:  |
     docker build -f ./CCA.Services.LogNook/Dockerfile -t nooksandcrannies.azurecr.io/$(imageName) .
 - script:  |
-    docker login -u $(servicePrincipal) -p $(servicePrincipalPassword) nooksandcrannies.azurecr.io
-    docker push nooksandcrannies.azurecr.io/$(imageName)
+    docker login -u marty@martymazurik.com -p Gb##qw04 mtmazurik/lognook
+    docker login --username=mtmazurik --email=marty@martymazurik.com
+    docker push mtmazurik/lognook:latest
 
