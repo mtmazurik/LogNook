@@ -12,6 +12,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AWS", "AWS", "{8FA679D9-F47E-4CD6-824C-4EE078E43D0F}"
 	ProjectSection(SolutionItems) = preProject
 		AWS\aws.env = AWS\aws.env
+		AWS\lognook-task-definition.json = AWS\lognook-task-definition.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Azure", "Azure", "{1EF72A7B-9CA8-4513-9287-927EC4F39DCA}"

@@ -54,13 +54,14 @@
     <!-- Prevents msbuild from auto generating an assemblyInfo file so that we can use our own without conflicts -->
   <PropertyGroup>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <DockerTargetOS>Windows</DockerTargetOS>
+    <DockerTargetOS>Linux</DockerTargetOS>
     <LangVersion>latest</LangVersion>
-    <StartupObject></StartupObject>
+    <StartupObject>CCA.Services.LogNook.Program</StartupObject>
     <ApplicationIcon />
     <OutputType>Exe</OutputType>
     <ApplicationInsightsResourceId>/subscriptions/952dfb7d-08e5-4e85-af0e-1a52239f9f47/resourcegroups/ContainersResourceGroup/providers/microsoft.insights/components/ContainersInsights</ApplicationInsightsResourceId>
     <ApplicationInsightsAnnotationResourceId>/subscriptions/952dfb7d-08e5-4e85-af0e-1a52239f9f47/resourcegroups/ContainersResourceGroup/providers/microsoft.insights/components/ContainersInsights</ApplicationInsightsAnnotationResourceId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
 </Project>
