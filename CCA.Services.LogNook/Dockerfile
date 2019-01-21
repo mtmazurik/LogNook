@@ -4,13 +4,14 @@ EXPOSE 80
 
 FROM microsoft/dotnet:2.2-sdk AS build
 WORKDIR /src
-COPY CCA.Services.LogNook.csproj ./
-RUN dotnet restore CCA.Services.LogNook.csproj
-COPY . ./
-RUN dotnet build CCA.Services.LogNook.csproj -c Release -o /app
+COPY ["CCA.Services.LogNook/CCA.Services.LogNook.csproj", "CCA.Services.LogNook/"]
+RUN dotnet restore "CCA.Services.LogNook/CCA.Services.LogNook.csproj"
+COPY . .
+WORKDIR "/src/CCA.Services.LogNook"
+RUN dotnet build "CCA.Services.LogNook.csproj" -c Release -o /app
 
 FROM build AS publish
-RUN dotnet publish CCA.Services.LogNook.csproj -c Release -o /app
+RUN dotnet publish "CCA.Services.LogNook.csproj" -c Release -o /app
 
 FROM base AS final
 WORKDIR /app
