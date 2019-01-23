@@ -15,9 +15,9 @@
       "essential": true,
       "portMappings": [
         {
-          "containerPort": 8091,
+          "containerPort": 80,
           "protocol": "tcp",
-          "hostPort": 8091
+          "hostPort": 80
         }
       ],
       "logConfiguration": {

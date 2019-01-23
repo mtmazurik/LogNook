@@ -11,6 +11,7 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AWS", "AWS", "{8FA679D9-F47E-4CD6-824C-4EE078E43D0F}"
 	ProjectSection(SolutionItems) = preProject
+		CCA.Services.LogNook\aws-ecs-tools-defaults.json = CCA.Services.LogNook\aws-ecs-tools-defaults.json
 		AWS\aws.env = AWS\aws.env
 		AWS\lognook-task-definition.json = AWS\lognook-task-definition.json
 	EndProjectSection
